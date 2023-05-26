@@ -1,0 +1,20 @@
+// User
+npx sequelize-cli model:generate --name User --attributes id:string,name:string,email:string,telephone:string,address:text,password:string,role:enum
+
+// RentalTransaction
+npx sequelize-cli model:generate --name RentalTransaction --attributes id:string,car_id:string,user_id:string,rental_date:dateonly,return_date:dateonly,destination_address:string
+
+// Car
+npx sequelize-cli model:generate --name Car --attributes id:string,rental_company_id:string,name:string,type:string,year:dateonly,status:enum
+
+// RentalCompany
+npx sequelize-cli model:generate --name RentalCompany --attributes id:string,name:string,address:text,telephone:string
+
+// RentalPrice
+npx sequelize-cli model:generate --name RentalPrice --attributes id:string,car_id:string,rental_price:integer
+
+// Penalty
+npx sequelize-cli model:generate --name Penalty --attributes id:string,rental_price_id:string,penalty_amount:integer
+
+// Location
+npx sequelize-cli model:generate --name Location --attributes id:string,rental_company_id:string,name:string,address:text
