@@ -32,7 +32,17 @@ app.use((req, res, next) => {
   next();
 });
 
-require('./app/router/router')(app);
+const userRoutes = require('./app/routes/userRouter');
+const carsRoutes = require('./app/routes/carsRouter');
+const rentalCompaniesRoutes = require('./app/routes/rentalCompaniesRouter');
+const rentalPriceRoutes = require('./app/routes/rentalPriceRouter');
+const { errorHandler } = require('./app/utils/errorResponse');
+
+app.use('/api', userRoutes);
+app.use('/api', carsRoutes);
+app.use('/api', rentalCompaniesRoutes);
+app.use('/api', rentalPriceRoutes);
+app.use(errorHandler);
 
 db.sequelize.sync().then(() => {
   // createRoles();
