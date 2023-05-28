@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     rental_company_id: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,

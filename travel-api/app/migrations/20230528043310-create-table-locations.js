@@ -1,31 +1,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Cars', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
+    await queryInterface.createTable('Locations', {
       id: {
         type: Sequelize.STRING,
+        allowNull: false,
+        primaryKey: true,
       },
       rental_company_id: {
         type: Sequelize.STRING,
+        references: {
+          model: 'RentalCompanies',
+          key: 'id',
+        },
       },
       name: {
         type: Sequelize.STRING,
       },
-      type: {
-        type: Sequelize.STRING,
-      },
-      year: {
-        type: Sequelize.DATEONLY,
-      },
-      status: {
-        type: Sequelize.ENUM('AVAILABLE', 'RENTED', 'UNAVAILABLE'),
-        defaultValue: 'AVAILABLE',
+      address: {
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Cars');
+    await queryInterface.dropTable('Locations');
   },
 };

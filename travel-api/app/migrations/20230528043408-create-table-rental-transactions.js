@@ -1,23 +1,33 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('RentalCompanies', {
+    await queryInterface.createTable('RentalTransactions', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.STRING,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        allowNull: false,
       },
-      id: {
+      car_id: {
         type: Sequelize.STRING,
+        references: {
+          model: 'Cars',
+          key: 'id',
+        },
       },
-      name: {
+      user_id: {
         type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
       },
-      address: {
-        type: Sequelize.TEXT,
+      rental_date: {
+        type: Sequelize.DATEONLY,
       },
-      telephone: {
+      return_date: {
+        type: Sequelize.DATEONLY,
+      },
+      destination_address: {
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -31,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('RentalCompanies');
+    await queryInterface.dropTable('RentalTransactions');
   },
 };

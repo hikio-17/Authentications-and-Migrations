@@ -1,0 +1,356 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Travel Api",
+    "contact": {}
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "securityDefinitions": {},
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "summary": "Add user_2 valid payload role 'ADMIN'",
+        "tags": [
+          "users"
+        ],
+        "operationId": "Adduser_2validpayloadrole'ADMIN'",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Adduser_2validpayloadrole%27ADMIN%27Request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "summary": "Login with valid payload role 'ADMIN'",
+        "tags": [
+          "authentications"
+        ],
+        "operationId": "Loginwithvalidpayloadrole'ADMIN'",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Loginwithvalidpayloadrole%27ADMIN%27Request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/cars": {
+      "post": {
+        "summary": "Add car with valid payload and admin role",
+        "tags": [
+          "cars"
+        ],
+        "operationId": "Addcarwithvalidpayloadandadminrole",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddcarwithvalidpayloadandadminroleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all cars",
+        "tags": [
+          "cars"
+        ],
+        "operationId": "Getallcars",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/cars/car-2ekGqVlWP5avzKd0oX2-7": {
+      "get": {
+        "summary": "Get car by ID",
+        "tags": [
+          "cars"
+        ],
+        "operationId": "GetcarbyID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rental-companies": {
+      "post": {
+        "summary": "Add rental company with valid payload and admin role",
+        "tags": [
+          "Rental Companies"
+        ],
+        "operationId": "Addrentalcompanywithvalidpayloadandadminrole",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddrentalcompanywithvalidpayloadandadminroleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Adduser_2validpayloadrole'ADMIN'Request": {
+      "title": "Adduser_2validpayloadrole'ADMIN'Request",
+      "example": {
+        "name": "admin",
+        "email": "admin@gmail.com",
+        "address": "MY location",
+        "telephone": "0822-xxxx-xxxx",
+        "password": "admin",
+        "role": "ADMIN"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "address",
+        "telephone",
+        "password",
+        "role"
+      ]
+    },
+    "Loginwithvalidpayloadrole'ADMIN'Request": {
+      "title": "Loginwithvalidpayloadrole'ADMIN'Request",
+      "example": {
+        "email": "admin@gmail.com",
+        "password": "admin"
+      },
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "AddcarwithvalidpayloadandadminroleRequest": {
+      "title": "AddcarwithvalidpayloadandadminroleRequest",
+      "example": {
+        "rental_company_id": "rental_company-rBUNkw6P5u",
+        "name": "Pajero",
+        "type": "Sport",
+        "year": "2022-03-03",
+        "status": "RENTED"
+      },
+      "type": "object",
+      "properties": {
+        "rental_company_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "year": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "rental_company_id",
+        "name",
+        "type",
+        "year",
+        "status"
+      ]
+    },
+    "AddrentalcompanywithvalidpayloadandadminroleRequest": {
+      "title": "AddrentalcompanywithvalidpayloadandadminroleRequest",
+      "example": {
+        "name": "Rental Company 1",
+        "address": "Addres 2",
+        "telephone": "082237888697"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "address",
+        "telephone"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "users"
+    },
+    {
+      "name": "authentications"
+    },
+    {
+      "name": "cars"
+    },
+    {
+      "name": "Rental Companies"
+    }
+  ]
+}

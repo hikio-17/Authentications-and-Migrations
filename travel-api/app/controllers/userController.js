@@ -8,13 +8,14 @@ const { validateUserSignupPayload } = require('../validator/validateUserSignup')
 
 const signup = asyncHandler(async (req, res, next) => {
   const { error } = validateUserSignupPayload(req.body);
+
+  if (error) {
+    return clientErrorResponse(res, error.message);
+  }
   const emailExisting = await verifyDuplicateEmail(req.body.email);
 
   if (emailExisting) {
     return clientErrorResponse(res, `${emailExisting} already used.`);
-  }
-  if (error) {
-    return clientErrorResponse(res, error.message);
   }
 
   const userId = await addUser(req.body);

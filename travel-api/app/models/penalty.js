@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     rental_price_id: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     penalty_amount: DataTypes.INTEGER,
   }, {

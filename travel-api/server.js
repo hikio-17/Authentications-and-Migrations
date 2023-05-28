@@ -1,8 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const swaggerUi = require('swagger-ui-express');
 const db = require('./app/models');
+
+const swaggerDocument = require('./swagger.json');
 
 const app = express();
 
@@ -36,13 +40,25 @@ const userRoutes = require('./app/routes/userRouter');
 const carsRoutes = require('./app/routes/carsRouter');
 const rentalCompaniesRoutes = require('./app/routes/rentalCompaniesRouter');
 const rentalPriceRoutes = require('./app/routes/rentalPriceRouter');
+const locationRoutes = require('./app/routes/locationRouter');
+const transactionRoutes = require('./app/routes/transactionRouter');
+const penaltyRoutes = require('./app/routes/penaltyRouter');
 const { errorHandler } = require('./app/utils/errorResponse');
 
 app.use('/api', userRoutes);
 app.use('/api', carsRoutes);
 app.use('/api', rentalCompaniesRoutes);
 app.use('/api', rentalPriceRoutes);
+app.use('/api', locationRoutes);
+app.use('/api', transactionRoutes);
+app.use('/api', penaltyRoutes);
 app.use(errorHandler);
+
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument),
+);
 
 db.sequelize.sync().then(() => {
   // createRoles();

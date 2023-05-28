@@ -28,11 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     car_id: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     user_id: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     rental_date: {
       type: DataTypes.DATEONLY,

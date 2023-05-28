@@ -30,13 +30,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true,
     },
-    rental_company_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    rental_company_id: {
+      type: DataTypes.STRING,
     },
     type: {
       type: DataTypes.STRING,
