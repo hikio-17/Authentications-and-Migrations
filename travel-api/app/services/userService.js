@@ -58,8 +58,65 @@ const verifyDuplicateEmail = async (email) => {
   }
 };
 
+const getAllUsers = async () => {
+  const users = await User.findAll({
+    attributes: ['id', 'name', 'email'],
+  });
+
+  return users;
+};
+
+const getUserById = async (id) => {
+  const user = await User.findOne({
+    where: {
+      id,
+    },
+    attributes: { exclude: ['password'] },
+  });
+
+  if (!user) {
+    return {
+      error: `Not found user with id '${id}'`,
+      user: null,
+    };
+  }
+
+  return {
+    error: null,
+    user,
+  };
+};
+
+const deleteUserById = async (id) => {
+  const user = await User.findByPk(id);
+
+  if (!user) {
+    return {
+      error: `Can't delete. User with id '${id}' not found`,
+    };
+  }
+  await user.destroy();
+  return {
+    error: null,
+  };
+};
+
+const verifyUserAccess = async (userrAccess, userId) => {
+  const user = await User.findByPk(userId);
+
+  if (user.role === 'ADMIN' || user.id === userrAccess) {
+    return true;
+  }
+
+  return false;
+};
+
 module.exports = {
   addUser,
   verifyDuplicateEmail,
   verifyUserCredential,
+  getAllUsers,
+  getUserById,
+  deleteUserById,
+  verifyUserAccess,
 };

@@ -1,5 +1,6 @@
 const { nanoid } = require('nanoid');
-const { RentalTransaction } = require('../models');
+const { RentalTransaction, Car, RentalPrice } = require('../models');
+const { getUserById } = require('./userService');
 
 const addTransaction = async ({
   car_id, user_id, rental_date, return_date, destination_address,
@@ -19,13 +20,27 @@ const addTransaction = async ({
 };
 
 const getAllTransaction = async () => {
-  const transactions = await RentalTransaction.findAll();
+  const transactions = await RentalTransaction.findAll({
+    attributes: { exclude: ['createdAt', 'updatedAt'] },
+  });
 
   return transactions;
 };
 
 const getTransactionById = async (id) => {
-  const transaction = await RentalTransaction.findByPk(id);
+  const transaction = await RentalTransaction.findAll({
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: Car,
+        attributes: ['id', 'name', 'year', 'rental_company_id', 'type'],
+        include: [
+          { model: RentalPrice, nested: true }],
+      },
+    ],
+  });
 
   if (!transaction) {
     return {
@@ -43,12 +58,23 @@ const getTransactionById = async (id) => {
 const deleteTransactionById = async (id) => {
   const transaction = await RentalTransaction.findByPk(id);
 
-  if (transaction) {
-    return { error: ` Can't delete. Transaction with id '${id} not found` };
+  if (!transaction) {
+    return { error: ` Can't delete. Transaction with id '${id}' not found` };
   }
 
   await transaction.destroy();
   return { error: null };
+};
+
+const verifyUserAccessTransaction = async (userAccess, transactionId) => {
+  const user = await getUserById(userAccess);
+  const transaction = await getTransactionById(transactionId);
+
+  if (user.id === transaction.user_id || user.role === 'ADMIN') {
+    return true;
+  }
+
+  return false;
 };
 
 module.exports = {
@@ -56,4 +82,5 @@ module.exports = {
   getAllTransaction,
   getTransactionById,
   deleteTransactionById,
+  verifyUserAccessTransaction,
 };

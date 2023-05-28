@@ -2,12 +2,12 @@
 const { nanoid } = require('nanoid');
 const { RentalPrice } = require('../models');
 
-const addRentalPrice = async ({ card_id, rental_price }) => {
+const addRentalPrice = async ({ car_id, rental_price }) => {
   const id = `rental_price-${nanoid(10)}`;
 
   const rentalPrice = await RentalPrice.create({
     id,
-    card_id,
+    car_id,
     rental_price,
   });
 

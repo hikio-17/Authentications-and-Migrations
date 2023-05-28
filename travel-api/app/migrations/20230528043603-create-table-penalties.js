@@ -12,6 +12,7 @@ module.exports = {
         references: {
           model: 'RentalPrices',
           key: 'id',
+          onDelete: 'CASCADE',
         },
       },
       penalty_amount: {

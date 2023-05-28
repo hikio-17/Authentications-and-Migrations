@@ -1,5 +1,5 @@
 const { nanoid } = require('nanoid');
-const { RentalCompany } = require('../models');
+const { RentalCompany, Car } = require('../models');
 
 const addRentalCompany = async ({ name, address, telephone }) => {
   const id = `rental_company-${nanoid(10)}`;
@@ -15,7 +15,15 @@ const addRentalCompany = async ({ name, address, telephone }) => {
 };
 
 const getRentalCompanyById = async (id) => {
-  const rentalCompany = await RentalCompany.findByPk(id);
+  const rentalCompany = await RentalCompany.findOne({
+    where: {
+      id,
+    },
+    include: {
+      model: Car,
+      attributes: ['id', 'name', 'type', 'year'],
+    },
+  });
 
   if (!rentalCompany) {
     return {
@@ -31,7 +39,9 @@ const getRentalCompanyById = async (id) => {
 };
 
 const getAllRentalComapanies = async () => {
-  const rentalCompanies = await RentalCompany.findAll();
+  const rentalCompanies = await RentalCompany.findAll({
+    attributes: ['id', 'name', 'address'],
+  });
 
   return rentalCompanies;
 };

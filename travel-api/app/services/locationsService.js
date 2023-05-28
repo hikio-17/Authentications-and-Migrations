@@ -18,10 +18,16 @@ const getLocationById = async (id) => {
   const location = await Location.findByPk(id);
 
   if (!location) {
-    return { error: ` Can't found location with id '${id}` };
+    return {
+      error: ` Can't found location with id '${id}`,
+      location: null,
+    };
   }
 
-  return location;
+  return {
+    location,
+    error: null,
+  };
 };
 
 const getAllLocation = async () => {
@@ -32,9 +38,10 @@ const getAllLocation = async () => {
 
 const deleteLocationById = async (id) => {
   const location = await Location.findByPk(id);
+  console.log(location);
 
   if (!location) {
-    return { error: ` Can't delete. Location with id '${id} not found.` };
+    return { error: ` Can't delete. Location with id '${id}' not found.` };
   }
 
   await location.destroy();

@@ -5,15 +5,15 @@ const { clientErrorResponse } = require('../utils/errorResponse');
 const { addRentalPrice, deleteRentalPriceById } = require('../services/rentalPriceService');
 
 const postRentalPriceHandler = asyncHandler(async (req, res, next) => {
-  const { cardId: card_id } = req.params;
+  const { carId: car_id } = req.params;
   const { rental_price } = req.body;
-  const { error } = validateRentalPricePayload({ card_id, rental_price });
+  const { error } = validateRentalPricePayload({ car_id, rental_price });
 
   if (error) {
-    return clientErrorResponse(req, error);
+    return clientErrorResponse(res, error.message);
   }
 
-  const rentalPrice = await addRentalPrice({ card_id, rental_price });
+  const rentalPrice = await addRentalPrice({ car_id, rental_price });
 
   res.status(200).send({
     status: 'success',
@@ -25,17 +25,15 @@ const postRentalPriceHandler = asyncHandler(async (req, res, next) => {
 });
 
 const deleteRentalPriceByIdHandler = asyncHandler(async (req, res, next) => {
-  const { rentalPriceId } = req.params;
+  const { id } = req.params;
 
-  const { error } = await deleteRentalPriceById(rentalPriceId);
+  const { error } = await deleteRentalPriceById(id);
 
-  if (error) {
-    return clientErrorResponse(res, error);
-  }
+  if (error) clientErrorResponse(res, error);
 
   res.status(200).send({
     status: 'success',
-    message: `Successfully delete Rental price with id '${rentalPriceId}'`,
+    message: `Successfully delete Rental price with id '${id}'`,
   });
 });
 

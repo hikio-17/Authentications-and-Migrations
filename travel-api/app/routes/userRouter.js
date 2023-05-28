@@ -1,9 +1,12 @@
 const express = require('express');
-const { signup, signin } = require('../controllers/userController');
+const { verifyAccessToken } = require('../tokenize/TokenManager');
+const adminRole = require('../utils/userRole');
+const { getAllUsersHandler, getUserByIdHandler, deleteUserByIdHandler } = require('../controllers/userController');
 
 const router = express.Router();
 
-router.post('/auth/signup', signup);
-router.post('/auth/signin', signin);
+router.get('/users', verifyAccessToken, adminRole, getAllUsersHandler);
+router.get('/users/:id', verifyAccessToken, getUserByIdHandler);
+router.delete('/users/:id', verifyAccessToken, adminRole, deleteUserByIdHandler);
 
 module.exports = router;

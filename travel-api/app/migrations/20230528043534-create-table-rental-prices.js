@@ -12,6 +12,7 @@ module.exports = {
         references: {
           model: 'Cars',
           key: 'id',
+          onDelete: 'CASCADE',
         },
       },
       rental_price: {

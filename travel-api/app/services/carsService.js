@@ -19,7 +19,9 @@ const addCar = async ({
 };
 
 const getCars = async () => {
-  const cars = await Car.findAll();
+  const cars = await Car.findAll({
+    attributes: ['id', 'name', 'rental_company_id'],
+  });
   return cars;
 };
 

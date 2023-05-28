@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const { authenticationErrorResponse } = require('./errorResponse');
+const { authenticationErrorResponse, authorizationErrorResponse } = require('./errorResponse');
 
 const adminRole = async (req, res, next) => {
   const id = req.userId;
@@ -10,8 +10,10 @@ const adminRole = async (req, res, next) => {
     },
   });
 
+  console.log(user);
+
   if (user.role !== 'ADMIN') {
-    return authenticationErrorResponse(res, 'Require only  role admin!');
+    return authorizationErrorResponse(res, 'Require only  role admin!');
   }
 
   next();

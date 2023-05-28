@@ -20,11 +20,12 @@
   "paths": {
     "/auth/signup": {
       "post": {
-        "summary": "Add user_2 valid payload role 'ADMIN'",
+        "description": "- URL\n    - /auth/signup\n- Method\n    - POST\n- Request Body\n    - **name** as **string**\n    - **email** as **string**\n    - **address** as **string**\n    - **telephone** as **string**\n    - **password** as **string**\n    - **role** as **string** default **'USER'**\n- Response\n    \n\n<img src=\"https://content.pstmn.io/62c824fa-26a7-450e-9209-c653ae5501ba/aW1hZ2UucG5n\" width=\"580\" height=\"200\">",
+        "summary": "Add User",
         "tags": [
-          "users"
+          "authentications"
         ],
-        "operationId": "Adduser_2validpayloadrole'ADMIN'",
+        "operationId": "AddUser",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -36,7 +37,7 @@
             "required": true,
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Adduser_2validpayloadrole%27ADMIN%27Request"
+              "$ref": "#/definitions/AddUserRequest"
             }
           }
         ],
@@ -50,11 +51,12 @@
     },
     "/auth/signin": {
       "post": {
-        "summary": "Login with valid payload role 'ADMIN'",
+        "description": "- URL\n    - /auth/signup\n- Method\n    - POST\n- Request Body\n    - **email** as **string**\n    - **password** as **string**\n- Response\n    \n\n<img src=\"https://content.pstmn.io/15a0a334-083a-4b27-a910-62bca3e6b9b0/aW1hZ2UucG5n\" width=\"1167\" height=\"259\">",
+        "summary": "Login",
         "tags": [
           "authentications"
         ],
-        "operationId": "Loginwithvalidpayloadrole'ADMIN'",
+        "operationId": "Login",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -66,8 +68,226 @@
             "required": true,
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Loginwithvalidpayloadrole%27ADMIN%27Request"
+              "$ref": "#/definitions/LoginRequest"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "description": "- URL\n    - /users\n- Method\n    - GET\n- Headers\n    - x-access-token : Bearer\n- Response\n    \n\n<img src=\"https://content.pstmn.io/f9657763-06dd-4f04-a08c-815c5adfe648/aW1hZ2UucG5n\" width=\"698\" height=\"561\">",
+        "summary": "Get all users",
+        "tags": [
+          "users"
+        ],
+        "operationId": "Getallusers",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/users/user-dLjKRT1iLgdUWDWDtH87r": {
+      "get": {
+        "description": "- URL\n    - /users/\n- Method\n    - GET\n- Headers\n    - x-access-token : Bearer\n- Response\n    \n\n<img src=\"https://content.pstmn.io/1343952d-2edf-40d8-85ad-193fb9c9493a/aW1hZ2UucG5n\" width=\"681\" height=\"391\">",
+        "summary": "Get user by ID",
+        "tags": [
+          "users"
+        ],
+        "operationId": "GetuserbyID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "- URL\n    - /users/\n- Method\n    - DELETE\n- Headers\n    - x-access-token : Bearer\n- Response\n    \n\n<img src=\"https://content.pstmn.io/eb5c6f81-83d7-46c1-96ee-66f19c81e68e/aW1hZ2UucG5n\" alt=\"\" height=\"176\" width=\"704\">",
+        "summary": "Delete user by ID",
+        "tags": [
+          "users"
+        ],
+        "operationId": "DeleteuserbyID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rental-companies": {
+      "post": {
+        "description": "- URL\n    - /rental-companies\n- Method\n    - POST\n- Headers\n    - x-access-token : Bearer\n- Request Body\n    - **name** as **string**\n    - **address** as **string**\n    - **telephone** as **string**\n- Response\n    \n\n<img src=\"https://content.pstmn.io/6bff1c00-7a74-4685-b657-2d98462cfbfc/aW1hZ2UucG5n\" width=\"697\" height=\"379\">",
+        "summary": "Add rental company with valid payload and admin role",
+        "tags": [
+          "Rental Companies"
+        ],
+        "operationId": "Addrentalcompanywithvalidpayloadandadminrole",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddrentalcompanywithvalidpayloadandadminroleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "- URL\n    - /rental-companies\n- Method\n    - GET\n- Headers\n    - x-access-token : Bearer\n- Response\n    \n\n<img src=\"https://content.pstmn.io/1916e29a-bc48-4c9e-839f-c47f91d8a485/aW1hZ2UucG5n\" alt=\"\" height=\"500\" width=\"696\">",
+        "summary": "Get all rental companies",
+        "tags": [
+          "Rental Companies"
+        ],
+        "operationId": "Getallrentalcompanies",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rental-companies/rental_company-y1zLnmYomr": {
+      "get": {
+        "description": "- URL\n    - /rental-companies/\n- Method\n    - GET\n- Response\n    \n\n<img src=\"https://content.pstmn.io/def81b3d-2a2f-4cd7-b184-e3d82839bb01/aW1hZ2UucG5n\" alt=\"\" height=\"629\" width=\"682\">",
+        "summary": "Get rental company by ID",
+        "tags": [
+          "Rental Companies"
+        ],
+        "operationId": "GetrentalcompanybyID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rental-companies/rental_company-AYc0qbgvdC": {
+      "delete": {
+        "description": "- URL\n    - /rental-companies\n- Method\n    - POST\n- Headers\n    - x-access-token : Bearer\n- Request Body\n    - **name** as **string**\n    - **address** as **string**\n    - **telephone** as **string**\n- Response",
+        "summary": "Delete rental company by ID",
+        "tags": [
+          "Rental Companies"
+        ],
+        "operationId": "DeleterentalcompanybyID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
           }
         ],
         "responses": {
@@ -80,6 +300,7 @@
     },
     "/cars": {
       "post": {
+        "description": "- URL\n    - /cars\n- Method\n    - POST\n- Headers\n    - x-access-token : Bearer\n- Request Body\n    - **name** as **string**\n    - **type** as **string**\n    - **year** as **string**\n    - **rental_company_id as string**\n- Response\n    \n\n<img src=\"https://content.pstmn.io/47b9b729-02c9-4dad-a150-64bf09dd59f4/aW1hZ2UucG5n\" width=\"780\" height=\"357\">",
         "summary": "Add car with valid payload and admin role",
         "tags": [
           "cars"
@@ -128,6 +349,7 @@
         }
       },
       "get": {
+        "description": "- URL\n    - /cars\n- Method\n    - GET\n- Response\n    \n\n<img src=\"https://content.pstmn.io/a4f37394-5bcb-406c-a865-be00bad6f485/aW1hZ2UucG5n\" width=\"789\" height=\"516\">",
         "summary": "Get all cars",
         "tags": [
           "cars"
@@ -146,8 +368,9 @@
         }
       }
     },
-    "/cars/car-2ekGqVlWP5avzKd0oX2-7": {
+    "/cars/car-THU7xzL8w_hl5AGHgyvmW": {
       "get": {
+        "description": "- URL\n    - /cars/\n- Method\n    - GET\n- Response\n    \n\n<img src=\"https://content.pstmn.io/1a46bd67-565d-4f08-b853-ac2b570a135f/aW1hZ2UucG5n\" alt=\"\" height=\"335\" width=\"819\">",
         "summary": "Get car by ID",
         "tags": [
           "cars"
@@ -166,13 +389,56 @@
         }
       }
     },
-    "/rental-companies": {
-      "post": {
-        "summary": "Add rental company with valid payload and admin role",
+    "/cars/car-wsIaM6Khu0-9sXa3p86Uj": {
+      "delete": {
+        "description": "- URL\n    - /cars/\n- Method\n    - DELETE\n- Headers\n    - x-access-token : Bearer\n- Response\n    \n\n<img src=\"https://content.pstmn.io/729218ed-df44-45d3-aa2e-da2b5120650f/aW1hZ2UucG5n\" alt=\"\" height=\"137\" width=\"741\">",
+        "summary": "Delete car by id",
         "tags": [
-          "Rental Companies"
+          "cars"
         ],
-        "operationId": "Addrentalcompanywithvalidpayloadandadminrole",
+        "operationId": "Deletecarbyid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/cars/car-THU7xzL8w_hl5AGHgyvmW/prices": {
+      "post": {
+        "description": "- URL\n    - /cars//prices\n- Method\n    - POST\n- Headers\n    - x-access-token : Bearer\n- Request Body\n    - **rental_price** as **integer**\n- Response\n    \n\n<img src=\"https://content.pstmn.io/4c9480bb-3e29-4954-85d3-37900044cb7b/aW1hZ2UucG5n\" width=\"805\" height=\"290\">",
+        "summary": "Add rental price",
+        "tags": [
+          "Rental Price"
+        ],
+        "operationId": "Addrentalprice",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -204,7 +470,7 @@
             "required": true,
             "description": "",
             "schema": {
-              "$ref": "#/definitions/AddrentalcompanywithvalidpayloadandadminroleRequest"
+              "$ref": "#/definitions/AddrentalpriceRequest"
             }
           }
         ],
@@ -215,18 +481,426 @@
           }
         }
       }
+    },
+    "/cars/car-THU7xzL8w_hl5AGHgyvmW/prices/rental_price-6RBE6aFfbM": {
+      "delete": {
+        "summary": "Delete rental price by ID",
+        "tags": [
+          "Rental Price"
+        ],
+        "operationId": "DeleterentalpricebyID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/penalties": {
+      "post": {
+        "description": "- URL\n    - /penalties\n- Method\n    - POST\n- Headers\n    - x-access-token : Bearer\n- Request Body\n    - **rental_price**_id as **string**\n    - **penalty_amount as integer**\n- Response\n    \n\n<img src=\"https://content.pstmn.io/052db2a8-4d58-469f-8a39-dc49deb8be8b/aW1hZ2UucG5n\" width=\"746\" height=\"334\">",
+        "summary": "Add Penalty",
+        "tags": [
+          "Penalty"
+        ],
+        "operationId": "AddPenalty",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddPenaltyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/penalties/penalty-oujtg1gRNK": {
+      "delete": {
+        "description": "- URL\n    - /penalties/\n- Method\n    - DELETE\n- Headers\n    - x-access-token : Bearer\n- Response\n    \n\n<img src=\"https://content.pstmn.io/79d368c5-42cc-480c-b7d7-39f8b17f8695/aW1hZ2UucG5n\" alt=\"\" height=\"131\" width=\"708\">",
+        "summary": "Delete Penalty By ID",
+        "tags": [
+          "Penalty"
+        ],
+        "operationId": "DeletePenaltyByID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeletePenaltyByIDRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "post": {
+        "description": "- URL\n    - /transactions\n- Method\n    - POST\n- Request Body\n    - **car_id** as **string**\n    - **rental_date** as **date**\n    - **return_date** as **date**\n    - **destination_address** as **string**\n- Response\n    \n\n<img src=\"https://content.pstmn.io/0c0b780a-6ef0-40bc-8cd7-1eea8e24a6dc/aW1hZ2UucG5n\" alt=\"\" height=\"358\" width=\"754\">",
+        "summary": "Add Rental Transaction",
+        "tags": [
+          "Rental Transaction"
+        ],
+        "operationId": "AddRentalTransaction",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddRentalTransactionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "- URL\n    - /transactions\n- Method\n    - GET\n- Response\n    \n\n<img src=\"https://content.pstmn.io/378c419b-37b6-4f45-a972-6c1edc350210/aW1hZ2UucG5n\" alt=\"\" height=\"570\" width=\"750\">",
+        "summary": "Get All Transaction",
+        "tags": [
+          "Rental Transaction"
+        ],
+        "operationId": "GetAllTransaction",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/transactions/transaction-tqA1Qg2K0d": {
+      "get": {
+        "description": "- URL\n    - /auth/signup\n- Method\n    - POST\n- Request Body\n    - **name** as **string**\n    - **email** as **string**\n    - **address** as **string**\n    - **telephone** as **string**\n    - **password** as **string**\n    - **role** as **string** default **'USER'**\n- Response",
+        "summary": "Get Transaction By ID",
+        "tags": [
+          "Rental Transaction"
+        ],
+        "operationId": "GetTransactionByID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/transactions/transaction-jrQq580VpH": {
+      "delete": {
+        "description": "- URL\n    - /transactions/\n- Method\n    - GET\n- Response\n    \n\n<img src=\"https://content.pstmn.io/9eb5270b-d2b8-4fd0-9b47-f92f6e134fb7/aW1hZ2UucG5n\" alt=\"\" height=\"132\" width=\"824\">",
+        "summary": "Delete Transaction By ID",
+        "tags": [
+          "Rental Transaction"
+        ],
+        "operationId": "DeleteTransactionByID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/locations": {
+      "post": {
+        "summary": "Add Location With Valid Payload",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "AddLocationWithValidPayload",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddLocationWithValidPayloadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "summary": "GET  All Locations",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "GETAllLocations",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/locations/location-iSYg0ZmlAvtCp2KGunuKY": {
+      "delete": {
+        "summary": "Delete Location By ID",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "DeleteLocationByID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "enum": [
+              "application/json"
+            ],
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/locations/location-_1skKbAfl93z1aVIMLufv": {
+      "get": {
+        "summary": "Get Location By ID",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "GetLocationByID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "Adduser_2validpayloadrole'ADMIN'Request": {
-      "title": "Adduser_2validpayloadrole'ADMIN'Request",
+    "AddUserRequest": {
+      "title": "AddUserRequest",
       "example": {
-        "name": "admin",
-        "email": "admin@gmail.com",
+        "name": "user",
+        "email": "user@gmail.com",
         "address": "MY location",
         "telephone": "0822-xxxx-xxxx",
-        "password": "admin",
-        "role": "ADMIN"
+        "password": "secret",
+        "role": "USER"
       },
       "type": "object",
       "properties": {
@@ -258,11 +932,11 @@
         "role"
       ]
     },
-    "Loginwithvalidpayloadrole'ADMIN'Request": {
-      "title": "Loginwithvalidpayloadrole'ADMIN'Request",
+    "LoginRequest": {
+      "title": "LoginRequest",
       "example": {
-        "email": "admin@gmail.com",
-        "password": "admin"
+        "email": "user@gmail.com",
+        "password": "secret"
       },
       "type": "object",
       "properties": {
@@ -278,14 +952,39 @@
         "password"
       ]
     },
+    "AddrentalcompanywithvalidpayloadandadminroleRequest": {
+      "title": "AddrentalcompanywithvalidpayloadandadminroleRequest",
+      "example": {
+        "name": "Rental Company A",
+        "address": "jalan Samping",
+        "telephone": "0822-xxxx-xxxx"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "address",
+        "telephone"
+      ]
+    },
     "AddcarwithvalidpayloadandadminroleRequest": {
       "title": "AddcarwithvalidpayloadandadminroleRequest",
       "example": {
-        "rental_company_id": "rental_company-rBUNkw6P5u",
-        "name": "Pajero",
-        "type": "Sport",
+        "rental_company_id": "rental_company-y1zLnmYomr",
+        "name": "Mitsubishi Pajero Sport",
+        "type": "SUV",
         "year": "2022-03-03",
-        "status": "RENTED"
+        "status": "AVAILABLE"
       },
       "type": "object",
       "properties": {
@@ -313,44 +1012,144 @@
         "status"
       ]
     },
-    "AddrentalcompanywithvalidpayloadandadminroleRequest": {
-      "title": "AddrentalcompanywithvalidpayloadandadminroleRequest",
+    "AddrentalpriceRequest": {
+      "title": "AddrentalpriceRequest",
       "example": {
-        "name": "Rental Company 1",
-        "address": "Addres 2",
-        "telephone": "082237888697"
+        "rental_price": 1200000
       },
       "type": "object",
       "properties": {
+        "rental_price": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "rental_price"
+      ]
+    },
+    "AddPenaltyRequest": {
+      "title": "AddPenaltyRequest",
+      "example": {
+        "rental_price_id": "rental_price-bzxiWS5BfI",
+        "penalty_amount": 200000
+      },
+      "type": "object",
+      "properties": {
+        "rental_price_id": {
+          "type": "string"
+        },
+        "penalty_amount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "rental_price_id",
+        "penalty_amount"
+      ]
+    },
+    "DeletePenaltyByIDRequest": {
+      "title": "DeletePenaltyByIDRequest",
+      "example": {
+        "rental_price_id": "rental_price-GX7kkdYzxd",
+        "penalty_amount": 200000
+      },
+      "type": "object",
+      "properties": {
+        "rental_price_id": {
+          "type": "string"
+        },
+        "penalty_amount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "rental_price_id",
+        "penalty_amount"
+      ]
+    },
+    "AddRentalTransactionRequest": {
+      "title": "AddRentalTransactionRequest",
+      "example": {
+        "car_id": "car-THU7xzL8w_hl5AGHgyvmW",
+        "rental_date": "2023-05-06",
+        "return_date": "2023-08-07",
+        "destination_address": "Kemana Saja"
+      },
+      "type": "object",
+      "properties": {
+        "car_id": {
+          "type": "string"
+        },
+        "rental_date": {
+          "type": "string"
+        },
+        "return_date": {
+          "type": "string"
+        },
+        "destination_address": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "car_id",
+        "rental_date",
+        "return_date",
+        "destination_address"
+      ]
+    },
+    "AddLocationWithValidPayloadRequest": {
+      "title": "AddLocationWithValidPayloadRequest",
+      "example": {
+        "rental_company_id": "rental_company-AYc0qbgvdC",
+        "name": "Location C",
+        "address": "Your Location"
+      },
+      "type": "object",
+      "properties": {
+        "rental_company_id": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
         "address": {
           "type": "string"
-        },
-        "telephone": {
-          "type": "string"
         }
       },
       "required": [
+        "rental_company_id",
         "name",
-        "address",
-        "telephone"
+        "address"
       ]
     }
   },
   "tags": [
     {
+      "name": "authentications"
+    },
+    {
       "name": "users"
     },
     {
-      "name": "authentications"
+      "name": "Rental Companies"
     },
     {
       "name": "cars"
     },
     {
-      "name": "Rental Companies"
+      "name": "Rental Price"
+    },
+    {
+      "name": "Penalty"
+    },
+    {
+      "name": "Rental Transaction"
+    },
+    {
+      "name": "Locations"
     }
   ]
 }

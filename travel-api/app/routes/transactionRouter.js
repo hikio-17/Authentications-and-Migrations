@@ -13,6 +13,6 @@ const router = express.Router();
 router.get('/transactions', verifyAccessToken, adminRole, getAllTransactionHandler);
 router.get('/transactions/:id', verifyAccessToken, getTransactionByIdHandler);
 router.post('/transactions', verifyAccessToken, postTransactionHandler);
-router.delete('/transaction/:id', verifyAccessToken, deleteTransactionByIdHandler);
+router.delete('/transactions/:id', verifyAccessToken, deleteTransactionByIdHandler);
 
 module.exports = router;

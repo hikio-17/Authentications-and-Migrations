@@ -12,6 +12,7 @@ module.exports = {
         references: {
           model: 'Cars',
           key: 'id',
+          onDelete: 'CASCADE',
         },
       },
       user_id: {
@@ -19,6 +20,7 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id',
+          onDelete: 'CASCADE',
         },
       },
       rental_date: {

@@ -1,57 +1,56 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const asyncHandler = require('express-async-handler');
-const { addUser, verifyUserCredential, verifyDuplicateEmail } = require('../services/userService');
-const TokenManager = require('../tokenize/TokenManager');
-const { clientErrorResponse, authenticationErrorResponse } = require('../utils/errorResponse');
-const { validateUserSigninPayload } = require('../validator/validateUserSignin');
-const { validateUserSignupPayload } = require('../validator/validateUserSignup');
+const {
+  getAllUsers, getUserById, deleteUserById, verifyUserAccess,
+} = require('../services/userService');
+const { clientErrorResponse, authorizationErrorResponse } = require('../utils/errorResponse');
 
-const signup = asyncHandler(async (req, res, next) => {
-  const { error } = validateUserSignupPayload(req.body);
-
-  if (error) {
-    return clientErrorResponse(res, error.message);
-  }
-  const emailExisting = await verifyDuplicateEmail(req.body.email);
-
-  if (emailExisting) {
-    return clientErrorResponse(res, `${emailExisting} already used.`);
-  }
-
-  const userId = await addUser(req.body);
+const getAllUsersHandler = asyncHandler(async (req, res, next) => {
+  const users = await getAllUsers();
 
   res.status(200).send({
     status: 'success',
-    message: 'User registered successfully!',
+    message: 'Retrive all users',
     data: {
-      userId,
+      users,
     },
   });
 });
 
-const signin = asyncHandler(async (req, res, next) => {
-  const { error } = validateUserSigninPayload(req.body);
+const getUserByIdHandler = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  const userAccess = req.userId;
 
-  if (error) {
-    return clientErrorResponse(res, error.message);
-  }
+  const verifyAccess = await verifyUserAccess(userAccess, id);
 
-  const { error: errMessage, userId } = await verifyUserCredential(req.body);
-  if (errMessage) {
-    return authenticationErrorResponse(res, errMessage);
-  }
-  const token = TokenManager.generateAccessToken(userId);
+  if (!verifyAccess) authorizationErrorResponse('You are not authorized to access this resource');
+
+  const { error, user } = await getUserById(id);
+
+  if (error) clientErrorResponse(res, error);
 
   res.status(200).send({
     status: 'success',
-    message: 'Authentication successfully',
     data: {
-      token,
+      user,
     },
+  });
+});
+
+const deleteUserByIdHandler = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  const { error } = await deleteUserById(id);
+
+  if (error) clientErrorResponse(req, error);
+
+  res.status(200).send({
+    status: 'success',
+    message: `Delete User with id '${id}' successfully`,
   });
 });
 
 module.exports = {
-  signin,
-  signup,
+  getAllUsersHandler,
+  getUserByIdHandler,
+  deleteUserByIdHandler,
 };

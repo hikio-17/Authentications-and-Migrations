@@ -1,12 +1,16 @@
+/* eslint-disable import/no-dynamic-require */
 /* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const swaggerUi = require('swagger-ui-express');
+const path = require('path');
+const fs = require('fs');
 const db = require('./app/models');
 
 const swaggerDocument = require('./swagger.json');
+const { errorHandler } = require('./app/utils/errorResponse');
 
 const app = express();
 
@@ -36,24 +40,17 @@ app.use((req, res, next) => {
   next();
 });
 
-const userRoutes = require('./app/routes/userRouter');
-const carsRoutes = require('./app/routes/carsRouter');
-const rentalCompaniesRoutes = require('./app/routes/rentalCompaniesRouter');
-const rentalPriceRoutes = require('./app/routes/rentalPriceRouter');
-const locationRoutes = require('./app/routes/locationRouter');
-const transactionRoutes = require('./app/routes/transactionRouter');
-const penaltyRoutes = require('./app/routes/penaltyRouter');
-const { errorHandler } = require('./app/utils/errorResponse');
+const travelApiRoutes = (app) => {
+  const routesDir = path.join(__dirname, 'app', 'routes');
 
-app.use('/api', userRoutes);
-app.use('/api', carsRoutes);
-app.use('/api', rentalCompaniesRoutes);
-app.use('/api', rentalPriceRoutes);
-app.use('/api', locationRoutes);
-app.use('/api', transactionRoutes);
-app.use('/api', penaltyRoutes);
+  fs.readdirSync(routesDir).forEach((file) => {
+    const routerPath = path.join(routesDir, file);
+    const route = require(routerPath);
+    app.use('/api', route);
+  });
+};
+travelApiRoutes(app);
 app.use(errorHandler);
-
 app.use(
   '/api-docs',
   swaggerUi.serve,

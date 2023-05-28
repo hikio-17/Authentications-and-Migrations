@@ -12,6 +12,7 @@ module.exports = {
         references: {
           model: 'RentalCompanies',
           key: 'id',
+          onDelete: 'CASCADE',
         },
       },
       name: {

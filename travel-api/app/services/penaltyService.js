@@ -5,6 +5,7 @@ const addPenalty = async ({ rental_price_id, penalty_amount }) => {
   const id = `penalty-${nanoid(10)}`;
 
   const penalty = await Penalty.create({
+    id,
     rental_price_id,
     penalty_amount,
   });
