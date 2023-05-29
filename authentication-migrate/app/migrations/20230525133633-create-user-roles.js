@@ -4,9 +4,19 @@ module.exports = {
     await queryInterface.createTable('user_roles', {
       userId: {
         type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
       roleId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Roles',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

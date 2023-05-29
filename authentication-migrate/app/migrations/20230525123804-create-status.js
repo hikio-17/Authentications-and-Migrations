@@ -3,13 +3,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Statuses', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      id: {
         type: Sequelize.UUID,
+        primaryKey: true,
+        allowNull: false,
+        defaultValue: Sequelize.UUIDV4,
       },
       title: {
         type: Sequelize.STRING,
@@ -19,6 +16,11 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

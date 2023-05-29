@@ -31,27 +31,22 @@ app.use((req, res, next) => {
 
   next();
 });
+/** RUN SEEDER DATA */
+const { up, down } = require('./app/seeders/20230529154522-seed_roles');
 
-require('./app/router/router')(app);
+app.use('/api/seeder', async (req, res) => {
+  await down(db.sequelize.queryInterface, db.Sequelize);
+  await up(db.sequelize.queryInterface, db.Sequelize);
 
-db.sequelize.sync().then(() => {
-  // createRoles();
-  app.listen(port, () => console.log(`${title} run on ${baseUrl}/${port}`));
+  res.status(200).send({
+    status: 'success',
+    message: 'seeder successfully run',
+  });
 });
 
-// function createRoles() {
-//   db.Role.create({
-//     id: 1,
-//     name: 'USER',
-//   });
+/** MAIN ROUTE */
+require('./app/router/router')(app);
 
-//   db.Role.create({
-//     id: 2,
-//     name: 'ADMIN',
-//   });
-
-//   db.Role.create({
-//     id: 3,
-//     name: 'PM',
-//   });
-// }
+db.sequelize.authenticate().then(() => {
+  app.listen(port, () => console.log(`${title} run on ${baseUrl}/${port}`));
+});

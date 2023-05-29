@@ -4,10 +4,9 @@ require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const swaggerUi = require('swagger-ui-express');
 const fs = require('fs');
 
-
+const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const { errorHandler } = require('./app/utils/errorResponse');
 const runSeeders = require('./seeder');
@@ -26,7 +25,7 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-access-token',
   );
-  
+
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
     return res.status(200).json({});
