@@ -1,4 +1,6 @@
 const Jwt = require('jsonwebtoken');
+const { User } = require('../models');
+const { authenticationErrorResponse } = require('../utils/errorResponse');
 
 const TokenManager = {
   generateAccessToken: (id) => `Bearer ${Jwt.sign({
@@ -30,7 +32,7 @@ const TokenManager = {
       });
     }
 
-    Jwt.verify(token, 'hikio010217', (err, decode) => {
+    Jwt.verify(token, 'hikio010217', async (err, decode) => {
       if (err) {
         return res.status(500).send({
           status: 'error',
@@ -38,7 +40,13 @@ const TokenManager = {
         });
       }
 
-      req.userId = decode.id;
+      const userId = decode.id;
+
+      const user = await User.findByPk(userId);
+
+      if (!user) authenticationErrorResponse(res, 'Access token not valid. User not found');
+
+      req.userId = userId;
       next();
     });
   },

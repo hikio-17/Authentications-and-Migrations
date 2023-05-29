@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const { validateLocationPayload } = require('../validator/validateLocationPayload');
 const { clientErrorResponse } = require('../utils/errorResponse');
 const {
-  addLocation, deleteLocationById, getAllLocation, getLocationById,
+  addLocation, deleteLocationById, getAllLocation, getLocationById, editLocationById,
 } = require('../services/locationsService');
 
 const postLocationHandler = asyncHandler(async (req, res, next) => {
@@ -47,10 +47,22 @@ const getLocationByIdHandler = asyncHandler(async (req, res, next) => {
   });
 });
 
+const editLocationByIdHandler = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  const { error, message } = await editLocationById(req.body, id);
+
+  if (error) clientErrorResponse(res, message);
+
+  res.status(200).send({
+    status: 'success',
+    message,
+  });
+});
+
 const deleteLocationByIdHandler = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const { error } = await deleteLocationById(id);
-  console.log('================ lagi delete');
 
   if (error) return clientErrorResponse(res, error);
 
@@ -64,5 +76,6 @@ module.exports = {
   postLocationHandler,
   getAllLocationsHandler,
   getLocationByIdHandler,
+  editLocationByIdHandler,
   deleteLocationByIdHandler,
 };

@@ -5,13 +5,26 @@ const { RentalPrice } = require('../models');
 const addRentalPrice = async ({ car_id, rental_price }) => {
   const id = `rental_price-${nanoid(10)}`;
 
-  const rentalPrice = await RentalPrice.create({
-    id,
-    car_id,
+  const rentalPriceExisting = await RentalPrice.findOne({
+    where: {
+      car_id,
+    },
+  });
+
+  if (!rentalPriceExisting) {
+    const rentalPrice = await RentalPrice.create({
+      id,
+      car_id,
+      rental_price,
+    });
+    return rentalPrice;
+  }
+
+  rentalPriceExisting.update({
     rental_price,
   });
 
-  return rentalPrice;
+  return rentalPriceExisting;
 };
 
 const deleteRentalPriceById = async (id) => {

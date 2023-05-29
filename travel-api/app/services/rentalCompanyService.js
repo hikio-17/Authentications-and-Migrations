@@ -46,6 +46,36 @@ const getAllRentalComapanies = async () => {
   return rentalCompanies;
 };
 
+const editRentalCompanyById = async ({
+  name = '',
+  address = '',
+  telephone = '',
+}, id) => {
+  const rentalCompany = await RentalCompany.findByPk(id);
+
+  if (!rentalCompany) {
+    return {
+      error: true,
+      message: `Cant found rental company with id '${id}`,
+    };
+  }
+
+  await RentalCompany.update({
+    name: name || rentalCompany.name,
+    address: address || rentalCompany.address,
+    telephone: telephone || rentalCompany.telephone,
+  }, {
+    where: {
+      id,
+    },
+  });
+
+  return {
+    error: true,
+    message: `Successfully edit Rental Company with id '${id}`,
+  };
+};
+
 const deleteRentalCompanyById = async (id) => {
   const rentalCompany = await RentalCompany.findByPk(id);
 
@@ -61,5 +91,6 @@ module.exports = {
   addRentalCompany,
   getAllRentalComapanies,
   getRentalCompanyById,
+  editRentalCompanyById,
   deleteRentalCompanyById,
 };

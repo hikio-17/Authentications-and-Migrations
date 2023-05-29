@@ -41,6 +41,35 @@ const getCarById = async (id) => {
   };
 };
 
+const editCarById = async ({
+  name = '', year = '', type = '', status = 'AVAILABLE',
+}, id) => {
+  const car = await Car.findByPk(id);
+
+  if (!car) {
+    return {
+      error: true,
+      message: `Can't found car with id '${id}'`,
+    };
+  }
+
+  await Car.update({
+    name: name || car.name,
+    year: year || car.year,
+    type: type || car.type,
+    status: status || car.status,
+  }, {
+    where: {
+      id,
+    },
+  });
+
+  return {
+    error: false,
+    message: `Successfully update car with id '${id}'`,
+  };
+};
+
 const deleteCarById = async (id) => {
   const car = await Car.findByPk(id);
 
@@ -60,5 +89,6 @@ module.exports = {
   addCar,
   getCarById,
   getCars,
+  editCarById,
   deleteCarById,
 };

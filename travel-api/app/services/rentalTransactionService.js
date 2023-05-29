@@ -1,6 +1,7 @@
 const { nanoid } = require('nanoid');
 const { RentalTransaction, Car, RentalPrice } = require('../models');
 const { getUserById } = require('./userService');
+const calculateTotalDays = require('../utils/calculateTotalDays');
 
 const addTransaction = async ({
   car_id, user_id, rental_date, return_date, destination_address,
@@ -16,6 +17,15 @@ const addTransaction = async ({
     destination_address,
   });
 
+  // update status car to RENTED
+  await Car.update({
+    status: 'RENTED',
+  }, {
+    where: {
+      id: car_id,
+    },
+  });
+
   return transaction;
 };
 
@@ -28,21 +38,26 @@ const getAllTransaction = async () => {
 };
 
 const getTransactionById = async (id) => {
-  const transaction = await RentalTransaction.findAll({
+  // Transaction
+  const {
+    id: transactionId, car_id, rental_date, return_date, destination_address, user_id,
+  } = await RentalTransaction.findByPk(id);
+  const { rental_price } = await RentalPrice.findOne({
     where: {
-      id,
+      car_id,
     },
-    include: [
-      {
-        model: Car,
-        attributes: ['id', 'name', 'year', 'rental_company_id', 'type'],
-        include: [
-          { model: RentalPrice, nested: true }],
-      },
-    ],
   });
 
-  if (!transaction) {
+  // Car
+  const {
+    id: carId, name, type, year,
+  } = await Car.findByPk(car_id);
+
+  const totalDay = calculateTotalDays(rental_date, return_date);
+
+  const price = rental_price * totalDay;
+
+  if (!transactionId) {
     return {
       error: ` Can't found transaction with id '${id}`,
       transaction: null,
@@ -51,7 +66,20 @@ const getTransactionById = async (id) => {
 
   return {
     error: null,
-    transaction,
+    transaction: {
+      id: transactionId,
+      user_id,
+      car: {
+        id: carId,
+        name,
+        type,
+        year,
+      },
+      rental_date,
+      return_date,
+      destination_address,
+      price: `${rental_price} * ${totalDay} = Rp.${price}`,
+    },
   };
 };
 

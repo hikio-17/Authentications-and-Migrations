@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const asyncHandler = require('express-async-handler');
 const {
-  addCar, getCars, getCarById, deleteCarById,
+  addCar, getCars, getCarById, deleteCarById, editCarById,
 } = require('../services/carsService');
 const { clientErrorResponse } = require('../utils/errorResponse');
 const { validatePostCarPayload } = require('../validator/validateCarPayload');
@@ -52,6 +52,19 @@ const getCarByIdHandler = asyncHandler(async (req, res, next) => {
   });
 });
 
+const editCarByIdHandler = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  const { error, message } = await editCarById(req.body, id);
+
+  if (error) clientErrorResponse(res, message);
+
+  res.status(200).send({
+    status: 'success',
+    message,
+  });
+});
+
 const deleteCarByIdHandler = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
@@ -71,5 +84,6 @@ module.exports = {
   postCarHandler,
   getCarsHandler,
   getCarByIdHandler,
+  editCarByIdHandler,
   deleteCarByIdHandler,
 };

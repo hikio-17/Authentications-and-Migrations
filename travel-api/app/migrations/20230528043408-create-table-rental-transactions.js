@@ -12,16 +12,16 @@ module.exports = {
         references: {
           model: 'Cars',
           key: 'id',
-          onDelete: 'CASCADE',
         },
+        onDelete: 'CASCADE',
       },
       user_id: {
         type: Sequelize.STRING,
         references: {
           model: 'Users',
           key: 'id',
-          onDelete: 'CASCADE',
         },
+        onDelete: 'CASCADE',
       },
       rental_date: {
         type: Sequelize.DATEONLY,

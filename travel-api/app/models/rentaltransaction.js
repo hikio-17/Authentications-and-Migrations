@@ -13,10 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       RentalTransaction.belongsTo(models.User, {
         foreignKey: 'user_id',
+        onDelete: 'CASCADE',
       });
 
       RentalTransaction.belongsTo(models.Car, {
         foreignKey: 'car_id',
+        onDelete: 'CASCADE',
       });
     }
   }

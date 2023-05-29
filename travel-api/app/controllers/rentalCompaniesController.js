@@ -3,7 +3,11 @@ const asyncHandler = require('express-async-handler');
 const { validateRentalCompanyPayload } = require('../validator/validateRentalCompanyPayload');
 const { clientErrorResponse } = require('../utils/errorResponse');
 const {
-  addRentalCompany, getAllRentalComapanies, getRentalCompanyById, deleteRentalCompanyById,
+  addRentalCompany,
+  getAllRentalComapanies,
+  getRentalCompanyById,
+  deleteRentalCompanyById,
+  editRentalCompanyById,
 } = require('../services/rentalCompanyService');
 
 const postRentalCompanyHandler = asyncHandler(async (req, res, next) => {
@@ -52,6 +56,18 @@ const getRentalCompanyByIdHandler = asyncHandler(async (req, res, next) => {
   });
 });
 
+const editRentalCompanyByIdHandler = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  const { error, message } = await editRentalCompanyById(req.body, id);
+
+  if (error) clientErrorResponse(res, message);
+
+  res.status(200).send({
+    status: 'success',
+    message,
+  });
+});
+
 const deleteRentalCompanyByIdHandler = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
@@ -71,5 +87,6 @@ module.exports = {
   postRentalCompanyHandler,
   getAllRentalComapaniesHandler,
   getRentalCompanyByIdHandler,
+  editRentalCompanyByIdHandler,
   deleteRentalCompanyByIdHandler,
 };

@@ -9,10 +9,10 @@ module.exports = {
       },
       rental_company_id: {
         type: Sequelize.STRING,
+        onDelete: 'CASCADE',
         references: {
           model: 'RentalCompanies',
           key: 'id',
-          onDelete: 'CASCADE',
         },
       },
       name: {

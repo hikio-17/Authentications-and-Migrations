@@ -4,11 +4,6 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Car extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       // define association here
       Car.hasMany(models.RentalTransaction, {
@@ -17,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Car.belongsTo(models.RentalCompany, {
         foreignKey: 'rental_company_id',
+        onDelete: 'CASCADE',
       });
 
       Car.hasMany(models.RentalPrice, {

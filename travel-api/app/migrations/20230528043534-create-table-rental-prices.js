@@ -12,8 +12,8 @@ module.exports = {
         references: {
           model: 'Cars',
           key: 'id',
-          onDelete: 'CASCADE',
         },
+        onDelete: 'CASCADE',
       },
       rental_price: {
         type: Sequelize.INTEGER,

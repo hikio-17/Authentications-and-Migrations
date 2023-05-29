@@ -12,8 +12,8 @@ module.exports = {
         references: {
           model: 'RentalCompanies',
           key: 'id',
-          onDelete: 'CASCADE',
         },
+        onDelete: 'CASCADE',
       },
       name: {
         type: Sequelize.STRING,

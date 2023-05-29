@@ -4,13 +4,27 @@ const { Penalty } = require('../models');
 const addPenalty = async ({ rental_price_id, penalty_amount }) => {
   const id = `penalty-${nanoid(10)}`;
 
-  const penalty = await Penalty.create({
-    id,
-    rental_price_id,
+  const penaltyExisting = await Penalty.findOne({
+    where: {
+      rental_price_id,
+    },
+  });
+
+  if (!penaltyExisting) {
+    const penalty = await Penalty.create({
+      id,
+      rental_price_id,
+      penalty_amount,
+    });
+
+    return penalty;
+  }
+
+  penaltyExisting.update({
     penalty_amount,
   });
 
-  return penalty;
+  return penaltyExisting;
 };
 
 const deletePenalyById = async (id) => {

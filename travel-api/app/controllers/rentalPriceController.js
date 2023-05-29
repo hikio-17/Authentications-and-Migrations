@@ -9,9 +9,7 @@ const postRentalPriceHandler = asyncHandler(async (req, res, next) => {
   const { rental_price } = req.body;
   const { error } = validateRentalPricePayload({ car_id, rental_price });
 
-  if (error) {
-    return clientErrorResponse(res, error.message);
-  }
+  if (error) clientErrorResponse(res, error.message);
 
   const rentalPrice = await addRentalPrice({ car_id, rental_price });
 

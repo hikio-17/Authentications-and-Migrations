@@ -1,16 +1,16 @@
 const { User } = require('../models');
-const { authenticationErrorResponse, authorizationErrorResponse } = require('./errorResponse');
+const { authorizationErrorResponse } = require('./errorResponse');
 
 const adminRole = async (req, res, next) => {
+  console.log('===================================');
   const id = req.userId;
+  console.log(id);
 
   const user = await User.findOne({
     where: {
       id,
     },
   });
-
-  console.log(user);
 
   if (user.role !== 'ADMIN') {
     return authorizationErrorResponse(res, 'Require only  role admin!');

@@ -12,8 +12,8 @@ module.exports = {
         references: {
           model: 'RentalPrices',
           key: 'id',
-          onDelete: 'CASCADE',
         },
+        onDelete: 'CASCADE',
       },
       penalty_amount: {
         type: Sequelize.INTEGER,
