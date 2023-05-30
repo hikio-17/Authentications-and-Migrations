@@ -33,6 +33,15 @@ app.use((req, res, next) => {
   next();
 });
 
+/** ENDPOINT SEEDER */
+app.use('/api/seeder', (req, res) => {
+  runSeeders();
+  res.status(200).send({
+    status: 'success',
+    message: 'Seeder successfully run',
+  });
+});
+
 /** ROUTER TRAVEL API */
 fs.readdirSync('./app/routes').map((r) => app.use('/api', require(`./app/routes/${r}`)));
 /** ROUTER DOCUMENTATION TRAVEL API */
